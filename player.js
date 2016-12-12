@@ -13,11 +13,6 @@ const Player = function(x, y, world, input) {
   this.isReturning = false
   this.timeoutID = undefined
 
-
-
-
-
-
   this.health = 3
 }
 
@@ -59,11 +54,7 @@ Player.prototype.update = function() {
   } else if (this.input.getClicked("right")) {
     dir.x += 1
   }
-  // if (this.input.getClicked("space")) {
-  //   for (let i = 0; i < 200; i++) {
-  //     this.world.add(new Particle(this.pos.add(new Vector(0.5, 0.5))))
-  //   }
-  // }
+
   let newPos = this.pos
   if (!this.isReturning) {
     newPos = this.pos.add(dir)
@@ -97,10 +88,17 @@ Player.prototype.update = function() {
       this.pos = lostPos
 
     } else {
-        this.timeoutID = setInterval(()=> {
+      this.world.remove(this)
+      for (let x = 0; x < 1; x += 0.05) {
+        for (let y = 0; y < 1; y += 0.05) {
+          this.world.add(new Particle(this.pos.add(new Vector(x, y))))
+        }
+      }
+
+
+      this.timeoutID = window.setInterval(()=> {
         shouldDrawIntroScreen = true
-        this.world.remove(this)
-        },100)
+      },500)
 
 
     }
