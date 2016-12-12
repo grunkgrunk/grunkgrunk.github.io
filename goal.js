@@ -70,7 +70,7 @@ Goal.prototype.update = function () {
     if (randomWall) {
       this.world.add(randomWall)
     } else {
-      alert("gg u wine")
+      alert("GG You win! No more blocks can be placed. You truly have good memory!")
     }
     //Spawn coin
 
