@@ -69,6 +69,8 @@ Goal.prototype.update = function () {
 
     if (randomWall) {
       this.world.add(randomWall)
+    } else {
+      alert("gg u wine")
     }
     //Spawn coin
 
