@@ -4,17 +4,23 @@ const Goal = function(world, player){
   this.name = "goal"
   this.tag = "solid"
   this.world = world
-  this.color = "white"
+  this.color = Art.colors.goal
   this.pathfinder = new PathFinder()
+  this.shownAlpha = 0
+  this.alpha = 1
   this.player = player
+
 }
 
 Goal.prototype.render = function (ctx) {
   ctx.fillStyle = this.color
+  this.shownAlpha = lerp(this.shownAlpha, this.alpha, 0.05)
+  ctx.globalAlpha = this.shownAlpha
   ctx.save()
   ctx.translate(this.pos.x*scale + scale / 2, this.pos.y*scale + scale / 2)
   ctx.fillRect(-scale / 1.5 / 2, -scale / 1.5 / 2, scale / 1.5, scale / 1.5)
   ctx.restore()
+  ctx.globalAlpha = 1
 }
 
 
@@ -23,6 +29,7 @@ Goal.prototype.update = function () {
     // Increment livedForRounds
     gameState.rounds++
 
+    this.shownAlpha = 0
     //move to position
     if (this.pos.equals(this.startpos)) {
       this.pos = new Vector()
@@ -63,25 +70,6 @@ Goal.prototype.update = function () {
     if (randomWall) {
       this.world.add(randomWall)
     }
-
-    // while (!isLegal && possiblePositions.length > 2) {
-    //   let randI = Math.floor(Math.random()*(possiblePositions.length-2))+1
-    //   let randPos = possiblePositions[randI]
-    //   let wall = new Wall(randPos.x,randPos.y)
-    //   obstacles.push(wall)
-    //
-    //   isLegal =
-    //   this.pathfinder.isReachable(this.player.pos, this.pos, obstacles)
-    //
-    //   if (!isLegal) {
-    //     let i = obstacles.indexOf(wall)
-    //     obstacles.splice(i, 1)
-    //     possiblePositions.splice(randI, 1)
-    //   } else {
-    //     this.world.add(wall)
-    //   }
-    // }
-
     //Spawn coin
 
     if(this.world.getNames("coin").length < 1 && gameState.rounds > 3 && player.health < 6 && Math.random() > 0.75){
@@ -101,10 +89,10 @@ Goal.prototype.update = function () {
         let randI = Math.floor(Math.random()*freeSpaces.length)
         let coinpos = freeSpaces[randI]
         isLegal =
-        this.pathfinder.isReachable(coinpos, this.player.pos, this.world.getNames("wall"))
+        this.pathfinder.isReachable(this.player.pos, coinpos, this.world.getNames("wall"))
         //console.log(isLegal,coinpos);
         if(isLegal){
-          this.world.add(new Coin(coinpos.x,coinpos.y,this.world.scale))
+          this.world.add(new Coin(coinpos.x,coinpos.y))
           freeSpaces = []
         } else {
           freeSpaces.splice(randI,1)

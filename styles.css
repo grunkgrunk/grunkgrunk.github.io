@@ -2,38 +2,79 @@ html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+
+  -webkit-transition: all 1.5s ease-in-out;
+  -moz-transition: all 1.5s ease-in-out;
+  -ms-transition: all 1.5s ease-in-out;
+  -o-transition: all 1.5s ease-in-out;
+  transition: all 1.5s ease-in-out;
+
+  font-weight: lighter;
+
+
+
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: grey;
+  background-color: #202020;
+  transition: inherit;
+
+  /*-webkit-transition: all 1.5s ease-in-out;
+  -moz-transition: all 1.5s ease-in-out;
+  -ms-transition: all 1.5s ease-in-out;
+  -o-transition: all 1.5s ease-in-out;
+  transition: all 1.5s ease-in-out;*/
+
 }
+
 
 canvas {
   margin: auto;
   display: block;
-  background-color: white;
+  background-color: #202020;
+  -webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -ms-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+  opacity: 0;
+  z-index: -1;
 }
 
 p {
+  position: relative;
+  z-index: 1;
+  transition: inherit;
+  color: #202020;
   font-size: 20px;
   text-align: center;
+  font-weight: lighter;
 }
 
-/*span {
-  font-style: italic;
-  color: blue;
+#creators {
+  font-style: normal;
+}
+
+/*#score {
+  z-index: -2;
+  opacity: 1;
 }*/
 
 h1 {
+  position: relative;
+  transition: inherit;
   text-align: center;
   font-size: 40px;
   font-style: normal;
   font-weight: lighter;
+  color: #202020;
+  z-index: 1;
 }
 
 #info {
+  transition: inherit;
   text-align: center;
 }
 
@@ -41,20 +82,7 @@ h1 {
   font-style: italic;
 }
 
-a {
-  text-decoration: none;
-  font-weight: normal;
-  font-style: normal;
-}
-
-a:link {
-  color: black;
-}
-
-a:hover {
-  color: "rgb(50, 100, 100)";
-}
-
-a:visited {
-  color: "rgb(100, 100, 100)";
+#description, #credits {
+  transition: inherit;
+  color: #202020;
 }

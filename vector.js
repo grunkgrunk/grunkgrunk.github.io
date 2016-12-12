@@ -66,3 +66,7 @@ Vector.prototype.hat = function() {
 Vector.prototype.equals = function(v) {
     return this.x === v.x && this.y === v.y
 }
+
+Vector.prototype.lerp = function(target, t) {
+  return new Vector(this.x + t * (target.x - this.x), this.y + t * (target.y - this.y))
+}
