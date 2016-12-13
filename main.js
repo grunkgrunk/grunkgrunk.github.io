@@ -151,7 +151,9 @@ function disableScroll() {
     ctx.restore()
 
     if (shouldDrawIntroScreen) {
-
+      if(player.timeoutID){
+        clearInterval(player.timeoutID)
+      }
       document.getElementById("canvas").style.opacity = 0
       moveTitle(height/2)
 

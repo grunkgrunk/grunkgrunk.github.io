@@ -12,6 +12,8 @@ const Player = function(x, y, world, input) {
   this.input = input
   this.isReturning = false
   this.timeoutID = undefined
+  this.alpha = 1
+  this.shownAlpha = 0
 
   this.health = 3
 }
@@ -32,10 +34,13 @@ Player.prototype.render = function(ctx) {
     this.positions = [this.pos]
     this.isReturning = false
   }
+  this.shownAlpha = lerp(this.shownAlpha, this.alpha, 0.3)
+  ctx.globalAlpha = this.shownAlpha
   ctx.save()
   ctx.translate(this.shownPos.x*scale + scale / 2, this.shownPos.y*scale + scale / 2)
   ctx.fillRect(-scale / 1.5 / 2, -scale / 1.5 / 2, scale / 1.5, scale / 1.5)
   ctx.restore()
+  ctx.globalAlpha = 1
   // ctx.beginPath()
   // ctx.moveTo(this.positions[0].x * scale + scale / 2, this.positions[0].y * scale + scale/2)
   // this.positions.forEach(p => ctx.lineTo(p.x*scale + scale/2,p.y*scale + scale/2))
@@ -88,7 +93,7 @@ Player.prototype.update = function() {
       this.pos = lostPos
 
     } else {
-      this.world.remove(this)
+      this.alpha = 0
       for (let x = 0; x < 1; x += 0.05) {
         for (let y = 0; y < 1; y += 0.05) {
           this.world.add(new Particle(this.pos.add(new Vector(x, y))))
@@ -96,8 +101,9 @@ Player.prototype.update = function() {
       }
 
 
-      this.timeoutID = window.setInterval(()=> {
+      this.timeoutID = setInterval(()=> {
         shouldDrawIntroScreen = true
+        this.world.remove(this)
       },500)
 
 
