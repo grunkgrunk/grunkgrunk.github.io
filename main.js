@@ -157,7 +157,7 @@ function disableScroll() {
       document.getElementById("canvas").style.opacity = 0
       moveTitle(height/2)
 
-      if (input.getClicked("left") || input.getClicked("right") || input.getClicked("up") || input.getClicked("down")) {
+      if (input.getClicked("space") || input.getClicked("left") || input.getClicked("right") || input.getClicked("up") || input.getClicked("down")) {
         setup()
         shouldDrawIntroScreen = false
       }
