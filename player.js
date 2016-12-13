@@ -80,8 +80,10 @@ Player.prototype.update = function() {
       this.isReturning = true
       this.posIndex = this.positions.length - 1
       this.health--
-      for (let i = 0; i < 300; i++) {
-        this.world.add(new Particle(this.pos.add(new Vector(0.5, 0.5))))
+      for (let x = 0; x < 1; x += 0.05) {
+        for (let y = 0; y < 1; y += 0.05) {
+          this.world.add(new Particle(this.pos.add(new Vector(x, y))))
+        }
       }
       let lostPos
       if (gameState.rounds % 2 === 0) {
