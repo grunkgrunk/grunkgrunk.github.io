@@ -100,10 +100,10 @@ Player.prototype.update = function() {
         }
       }
 
-
+      this.world.remove(this)
       this.timeoutID = setInterval(()=> {
         shouldDrawIntroScreen = true
-        this.world.remove(this)
+
       },500)
 
 
