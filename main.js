@@ -63,7 +63,7 @@ window.onload = function() {
 
 
 // Disable keys
-var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+var keys = {37: 1, 38: 1, 39: 1, 40: 1, 32: 1};
 
 function preventDefault(e) {
   e = e || window.event;
